@@ -78,8 +78,8 @@
                 Share your favorite opinion and win and wp forum coffee mug!
               </p>
               <div class="relative">
-                <input class="py-5 pl-3 pr-32 focus-visible:none rounded-full focus:outline-none text-black" type="text" name="" id="input" placeholder="Search here anything">
-                <button class="btn btn-primary rounded-full absolute left-[215px] top-2">Get Started</button>
+                <input class="py-5 pl-3 pr-32 focus-visible:none rounded-full focus:outline-none text-black" type="text" name="" id="input-text" placeholder="Search here anything">
+                <button onclick="takeSearchText()" class="btn btn-primary rounded-full absolute left-[215px] top-2">Get Started</button>
               </div>
             </div>
           </div>
@@ -97,57 +97,23 @@
       <section class="mt-4">
         <h2 class="text-3xl font-extrabold text-center mb-4">Let’s Discuss</h2>
         <p class="max-w-lg mx-auto text-center">Yes, you can run unit tests and view the results directly within the app. The integrated testing features allow for a streamlined .</p>
-        
-         <div class="flex justify-between my-8">
+        <div id="loader"  class="flex justify-center my-16"><span class="loading loading-spinner loading-lg"></span></div>
+         <div class="flex justify-between my-8 gap-14">
           <!-- Post Container -->
-           <div id="posts-container">
-            <div class="flex w-[750px] justify-between bg-[#F3F3F5] rounded-2xl py-4 px-2" >
-              <!-- Post image -->
-            <div class="flex bg-[#797DFC1A rounded-lg] p-10">
-                <div>
-                  <div class="relative">
-                    <img class="w-24 h-20 rounded-lg" src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" alt="">
-                    <span class="-top-1 left-[67px] absolute  w-4 h-4 bg-green-400 border-2 border-white dark:border-gray-800 rounded-full"></span>
-                </div>
-              </div>
-            </div>
-            <!-- Post content --> 
-            <div class="divide-y divide-dashed">
-              <div class="pb-8">
-                <p >#Music  <span class="pl-3">Author: MUnna</span></p>
-                <h2 class="text-xl font-bold mb-4">10 Kids Unaware of Their Halloween Costume</h2>
-                <p>It’s one thing to subject yourself to ha Halloween costume mishap because, hey that’s your prerogative</p>
-              </div>
-              <div class="flex justify-between items-center pt-8">
-                <div class="flex gap-4">
-                    <p><i class="fa-regular fa-message"></i> <span>560</span></p>
-                    <p><i class="fa-regular fa-eye"></i> <span>1568</span></p>
-                    <p><i class="fa-regular fa-clock"></i>  <span>5min</span></p>
-                </div>
-                <div>
-                  <button class="btn rounded-full"><i class="fa-regular fa-envelope text-green-600"></i></button>
-                </div>
-              </div>
-            </div>
-            </div>
+           <div id="posts-container" class="flex-1">
            </div>
           <!-- Mark as read -->
-           <div>
+           <div class="flex-auto">
             <div class="bg-[#12132D0D] rounded-2xl p-6">
               <div class="flex justify-between">
                 <h2 class="text-2xl">Title</h2>
-                <div>
-                  <i class="fa-sharp-duotone fa-solid fa-check-double text-green-800"></i>
-                  <span>Mark as read (<span>4</span>)</span>
+                <div class="flex justify-between ">
+                  <div><i class="fa-sharp-duotone fa-solid fa-check-double text-green-800"></i></div>
+                  <div><span>Mark as read (<span id="read-count">0</span>)</span></div>
                 </div>
               </div>
-              <div class="flex justify-between items-center bg-white p-3 rounded-lg mt-2 gap-5">
-                <div >
-                  <p>10 Kids Unaware of Their Halloween Costume</p>
-                </div>
-                <div class="flex items-center gap-2">
-                  <i class="fa-regular fa-eye"></i> <span> 1568</span>
-                </div>
+              <div id='mark-as-read-container'>
+
               </div>
              </div>
            </div>
@@ -179,84 +145,6 @@
         <h2 class="text-3xl font-extrabold text-center mb-4">Latest Posts</h2>
         <p class="max-w-lg mx-auto text-center">Yes, you can run unit tests and view the results directly within the app. The integrated testing features allow for a streamlined .</p>
         <div id="latest-posts" class="grid grid-cols-3 mt-4">
-          <div class="card bg-base-100 w-96 shadow-xl">
-            <figure class="px-5 pt-5">
-              <img
-                src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
-                alt="Shoes"
-                class="rounded-xl" />
-            </figure>
-            <div class="card-body">
-              <p><i class="fa-regular fa-calendar-days"></i><span class="pl-2">29 January 2024</span></p>
-              <h2 class="card-title mb-3">What will a mars habitat force that impact in our daily life!!!</h2>
-              <p>Yes, you can run unit tests and view the results directly within the app. </p>
-              <div class="flex items-center mt-2">
-                <div>
-                  <div class="avatar">
-                    <div class="w-16 rounded-full">
-                      <img src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" />
-                    </div>
-                  </div>
-                </div>
-                <div class="ml-3">
-                  <h3 class="font-bold">Cameron Williamson</h3>
-                  <p>Unknown</p>
-                </div>
-               </div>
-          </div>
-        </div>
-          <div class="card bg-base-100 w-96 shadow-xl">
-            <figure class="px-5 pt-5">
-              <img
-                src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
-                alt="Shoes"
-                class="rounded-xl" />
-            </figure>
-            <div class="card-body">
-              <p><i class="fa-regular fa-calendar-days"></i><span class="pl-2">29 January 2024</span></p>
-              <h2 class="card-title mb-3">What will a mars habitat force that impact in our daily life!!!</h2>
-              <p>Yes, you can run unit tests and view the results directly within the app. </p>
-              <div class="flex items-center mt-2">
-                <div>
-                  <div class="avatar">
-                    <div class="w-16 rounded-full">
-                      <img src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" />
-                    </div>
-                  </div>
-                </div>
-                <div class="ml-3">
-                  <h3 class="font-bold">Cameron Williamson</h3>
-                  <p>Unknown</p>
-                </div>
-               </div>
-          </div>
-        </div>
-          <div class="card bg-base-100 w-96 shadow-xl">
-            <figure class="px-5 pt-5">
-              <img
-                src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
-                alt="Shoes"
-                class="rounded-xl" />
-            </figure>
-            <div class="card-body">
-              <p><i class="fa-regular fa-calendar-days"></i><span class="pl-2">29 January 2024</span></p>
-              <h2 class="card-title mb-3">What will a mars habitat force that impact in our daily life!!!</h2>
-              <p>Yes, you can run unit tests and view the results directly within the app. </p>
-              <div class="flex items-center mt-2">
-                <div>
-                  <div class="avatar">
-                    <div class="w-16 rounded-full">
-                      <img src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" />
-                    </div>
-                  </div>
-                </div>
-                <div class="ml-3">
-                  <h3 class="font-bold">Cameron Williamson</h3>
-                  <p>Unknown</p>
-                </div>
-               </div>
-          </div>
-        </div>
        </div>
       </section>
     </main>

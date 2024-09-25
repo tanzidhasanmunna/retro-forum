@@ -1,6 +1,7 @@
 
 const allPostUrl = `https://openapi.programming-hero.com/api/retro-forum/posts`
 const latestPostsUrl =`https://openapi.programming-hero.com/api/retro-forum/latest-posts`
+let readCount = 0;
 
 const loadData = async(postUrl) =>{
     const res = await fetch(postUrl)
@@ -13,8 +14,15 @@ const loadData = async(postUrl) =>{
 const loadLatestPosts = async () => {
     const res = await fetch(latestPostsUrl)
     const data = await res.json()
-    console.log(data)
+    // console.log(data)
     showLatestPosts(data);
+}
+
+const loadSearchData = async (category) => {
+  const res = await fetch(`https://openapi.programming-hero.com/api/retro-forum/posts?category=${category}`)
+  const data = await res.json();
+  const posts = data.posts;
+  showPosts(posts);
 }
 const showPosts = (posts) => {
     const postsContainer = document.getElementById('posts-container')
@@ -37,7 +45,7 @@ const showPosts = (posts) => {
             <div class="divide-y divide-dashed flex-1">
               <div class="pb-8">
                 <p >#${post.category}  <span class="pl-3">Author: ${post.author.name}</span></p>
-                <h2 class="text-xl font-bold mb-4">${post.title}</h2>
+                <h2 id="${post.id}" class="text-xl font-bold mb-4">${post.title}</h2>
                 <p>${post.description}</p>
               </div>
               <div class="flex justify-between items-center pt-8">
@@ -47,13 +55,16 @@ const showPosts = (posts) => {
                     <p><i class="fa-regular fa-clock"></i>  <span>${post.posted_time} min</span></p>
                 </div>
                 <div>
-                  <button class="btn rounded-full"><i class="fa-regular fa-envelope text-green-600"></i></button>
+                  <button onclick="markAsRead(${post.view_count}, ${post.id})" class="btn rounded-full">
+                    <i class="fa-regular fa-envelope text-green-600"></i>
+                  </button>
                 </div>
               </div>
             </div>
         `
         postsContainer.appendChild(postElement)
     })
+    document.getElementById('loader').classList.add('hidden')
 }
 const showLatestPosts = (posts) => {
     const latestPostsElement = document.getElementById('latest-posts')
@@ -89,6 +100,29 @@ const showLatestPosts = (posts) => {
         `
         latestPostsElement.appendChild(div);
     })
+}
+const markAsRead = (view,id) => {
+  readCount++;
+  const markAsReadElement = document.getElementById('mark-as-read-container');
+  const readCountElement = document.getElementById('read-count')
+  const postTitle = document.getElementById(id).innerText
+  readCountElement.innerText = readCount;
+  const div = document.createElement('div');
+  div.classList ='flex justify-between items-center bg-white p-3 rounded-lg mt-2 gap-5';
+  div.innerHTML =`
+                    <div >
+                    <p>${postTitle}</p>
+                  </div>
+                  <div class="flex items-center gap-2">
+                    <i class="fa-regular fa-eye"></i> <span> ${view}</span>
+                  </div>
+  `
+  markAsReadElement.appendChild(div);
+}
+
+const takeSearchText = () =>{
+  const textSearch = document.getElementById('input-text').value;
+  loadSearchData(textSearch);
 }
 loadData(allPostUrl);
 loadLatestPosts(latestPostsUrl);
